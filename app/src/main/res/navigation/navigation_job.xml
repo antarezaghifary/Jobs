@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_job"
+    app:startDestination="@id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.reza.jobs.ui.screen.home.HomeJobFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home_job">
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_account"
+        android:name="com.reza.jobs.ui.screen.profile.ProfileFragment"
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_profile">
+<!--        <action-->
+<!--            android:id="@+id/action_navigation_genre_to_detailFragment"-->
+<!--            app:destination="@id/detailFragment" />-->
+    </fragment>
+</navigation>

@@ -1,5 +1,6 @@
 package com.reza.jobs.di
 
+import com.reza.jobs.ui.screen.login.LoginViewModel
 import com.reza.jobs.ui.screen.splash.SplashViewModel
 import com.reza.jobs.util.ContextProvider
 import org.koin.android.ext.koin.androidApplication
@@ -8,6 +9,7 @@ import org.koin.dsl.module
 
 val viewModelModule = module {
     viewModel { SplashViewModel(androidApplication()) }
+    viewModel { LoginViewModel(androidApplication()) }
 }
 
 val apiRepositoryModule = module {

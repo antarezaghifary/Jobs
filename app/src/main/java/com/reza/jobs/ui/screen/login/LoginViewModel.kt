@@ -1,4 +1,4 @@
-package com.reza.jobs.ui.screen.splash
+package com.reza.jobs.ui.screen.login
 
 import android.app.Application
 import androidx.lifecycle.viewModelScope
@@ -7,16 +7,8 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 
-class SplashViewModel(application: Application) :
-    BaseViewModel<SplashNavigator>(application) {
-
-    fun displaySplashAsync(): Deferred<Boolean> {
-        return viewModelScope.async {
-            delay(2000)
-            navigator?.navigateToLoginJob()
-            return@async true
-        }
-    }
+class LoginViewModel (application: Application) :
+    BaseViewModel<LoginNavigator>(application) {
 
     fun successLogin(): Deferred<Boolean> {
         return viewModelScope.async {
@@ -25,4 +17,5 @@ class SplashViewModel(application: Application) :
             return@async true
         }
     }
+
 }
