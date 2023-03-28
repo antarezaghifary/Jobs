@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "722159875603",
+    "project_id": "jobs-8de61",
+    "storage_bucket": "jobs-8de61.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:722159875603:android:91ec26877fa87fe2fa71e6",
+        "android_client_info": {
+          "package_name": "com.reza.jobs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "722159875603-ii2ii9f93sad3it6fjahhu96mpqir8f9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeoLbeUbJcy0-RiMzYRKtG8Q7EY8W_kfU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "722159875603-ii2ii9f93sad3it6fjahhu96mpqir8f9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

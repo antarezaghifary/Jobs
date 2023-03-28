@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -21,6 +22,9 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField("String", "API_URL", "\"http://dev3.dansmultipro.co.id/api/recruitment/\"")
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -100,4 +104,8 @@ dependencies {
     testImplementation "androidx.arch.core:core-testing:2.1.0"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.9"
     implementation "androidx.test.espresso:espresso-idling-resource:3.4.0"
+
+    //Firebase
+    implementation 'com.google.firebase:firebase-auth-ktx:21.1.0'
+    implementation 'com.google.android.gms:play-services-auth:20.4.1'
 }
