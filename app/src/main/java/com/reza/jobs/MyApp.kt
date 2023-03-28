@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
 import com.reza.jobs.di.apiRepositoryModule
+import com.reza.jobs.di.remoteModule
 import com.reza.jobs.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -30,7 +31,8 @@ class MyApp : Application() {
             modules(
                 listOf(
                     viewModelModule,
-                    apiRepositoryModule
+                    apiRepositoryModule,
+                    remoteModule
                 )
             )
         }
