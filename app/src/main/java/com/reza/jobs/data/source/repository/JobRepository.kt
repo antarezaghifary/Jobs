@@ -2,12 +2,13 @@ package com.reza.jobs.data.source.repository
 
 import com.reza.jobs.data.model.PositionModel
 import com.reza.jobs.data.source.endpoint.ApiService
+import kotlinx.coroutines.awaitAll
 
 class JobRepository(
     private val apiService: ApiService
 ) {
     suspend fun getPosition(
-    ): PositionModel.Response{
+    ): List<PositionModel.Response.Data>{
         return apiService.getPosition().await()
     }
 }

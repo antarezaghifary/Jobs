@@ -13,8 +13,8 @@ import kotlinx.coroutines.launch
 class HomeJobViewModel (private val repository: JobRepository, application: Application) :
     BaseViewModel<HomeJobNavigator>(application) {
 
-    private val _listPosition = MutableLiveData<Resource<PositionModel.Response>>()
-    val listPosition : MutableLiveData<Resource<PositionModel.Response>>
+    private val _listPosition = MutableLiveData<Resource<List<PositionModel.Response.Data>>>()
+    val listPosition : MutableLiveData<Resource<List<PositionModel.Response.Data>>>
     get() = _listPosition
 
     fun getListPosition() {
