@@ -2,6 +2,8 @@ package com.reza.jobs.ui.screen.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -13,7 +15,7 @@ import com.reza.jobs.util.loadImage
 
 class ItemPositionAdapter(
     private val listener: (PositionModel.Response.Data) -> Unit
-) : ListAdapter<PositionModel.Response.Data, ItemPositionAdapter.ViewHolder>(DiffCallback()) {
+) : PagingDataAdapter<PositionModel.Response.Data, ItemPositionAdapter.ViewHolder>(DiffCallback()) {
 
     class ViewHolder private constructor(
         private val binding: LayoutPositionBinding,
@@ -22,7 +24,6 @@ class ItemPositionAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: PositionModel.Response.Data) {
-//            binding.item = item
             if (item.company_logo != null) {
                 loadImage(binding.ivCompany, item.company_logo)
             }
@@ -53,7 +54,8 @@ class ItemPositionAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
+        item?.let { holder.bind(it) }
+        holder.setIsRecyclable(false)
     }
 
     class DiffCallback : DiffUtil.ItemCallback<PositionModel.Response.Data>() {

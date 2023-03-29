@@ -20,5 +20,5 @@ interface ApiService {
     @GET("positions.json")
     fun getPositionWithPagination(
         @Query("page") page: Int,
-    ): Deferred<List<PositionModel.Response>>
+    ): Deferred<List<PositionModel.Response.Data>>
 }

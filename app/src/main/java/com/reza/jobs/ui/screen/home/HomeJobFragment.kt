@@ -3,13 +3,20 @@ package com.reza.jobs.ui.screen.home
 import android.content.Intent
 import android.view.View
 import android.widget.Toast
+import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.reza.jobs.R
+import com.reza.jobs.adapter.LoadMoreAdapter
 import com.reza.jobs.data.model.PositionModel
 import com.reza.jobs.databinding.FragmentHomeJobBinding
 import com.reza.jobs.ui.base.BaseFragment
 import com.reza.jobs.ui.screen.detail.DetailJobActivity
 import com.reza.jobs.util.Status
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import net.cachapa.expandablelayout.ExpandableLayout
 import org.koin.android.ext.android.inject
 
@@ -26,7 +33,6 @@ class HomeJobFragment : BaseFragment<FragmentHomeJobBinding, HomeJobViewModel>()
         binding?.lifecycleOwner = this
         initUI()
         initListener()
-        onGetPosition()
         initAdapter()
     }
 
@@ -60,7 +66,7 @@ class HomeJobFragment : BaseFragment<FragmentHomeJobBinding, HomeJobViewModel>()
     override fun getViewModels(): HomeJobViewModel = homeViewModel
 
     override fun onReadyAction() {
-        handleListPosition()
+        handlingPagingData()
     }
 
     private fun initAdapter() {
@@ -69,28 +75,28 @@ class HomeJobFragment : BaseFragment<FragmentHomeJobBinding, HomeJobViewModel>()
         }
     }
 
-    private fun onGetPosition() {
-        homeViewModel.getListPosition()
-    }
-
-    private fun handleListPosition() {
-        homeViewModel.listPosition.observe(this) {
-            when (it.status) {
-                Status.LOADING -> {
-
+    private fun handlingPagingData(){
+        binding?.apply {
+            lifecycleScope.launch {
+                homeViewModel.jobList.collect{
+                    itemPositionAdapter.submitData(it)
                 }
-                Status.SUCCESS -> {
-                    it.data?.toMutableList().let {
-                        itemPositionAdapter.submitList(it)
-                        binding?.rvPosition?.adapter = itemPositionAdapter
-                    }
-                }
-                Status.ERROR -> {
-                    Toast.makeText(requireContext(), it.throwable.toString(), Toast.LENGTH_SHORT)
-                        .show()
-                }
-                else -> {}
             }
+            rvPosition.apply {
+                layoutManager = LinearLayoutManager(requireContext())
+                adapter = itemPositionAdapter
+            }
+            lifecycleScope.launchWhenCreated {
+                itemPositionAdapter.loadStateFlow.collect{
+                    val state = it.refresh
+                    progressBottom.isVisible = state is LoadState.Loading
+                }
+            }
+            rvPosition.adapter = itemPositionAdapter.withLoadStateFooter(
+                LoadMoreAdapter{
+                    itemPositionAdapter.retry()
+                }
+            )
         }
     }
 

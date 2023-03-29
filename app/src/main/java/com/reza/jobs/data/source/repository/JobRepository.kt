@@ -24,7 +24,7 @@ class JobRepository(
 
     suspend fun getPositionWithPagination(
         page: Int
-    ): List<PositionModel.Response> {
+    ): List<PositionModel.Response.Data> {
         return apiService.getPositionWithPagination(
             page
         ).await()

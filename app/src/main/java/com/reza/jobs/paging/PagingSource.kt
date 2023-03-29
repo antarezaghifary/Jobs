@@ -8,14 +8,14 @@ import retrofit2.HttpException
 
 class PagingSource(
     private val repository: JobRepository
-) : PagingSource<Int, PositionModel.Response>() {
+) : PagingSource<Int, PositionModel.Response.Data>() {
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PositionModel.Response> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PositionModel.Response.Data> {
         return try {
             val currentPage = params.key ?: 1
             val response = repository.getPositionWithPagination(currentPage)
             val data = response
-            val responseData = mutableListOf<PositionModel.Response>()
+            val responseData = mutableListOf<PositionModel.Response.Data>()
             responseData.addAll(data)
 
             LoadResult.Page(
@@ -30,7 +30,7 @@ class PagingSource(
         }
     }
 
-    override fun getRefreshKey(state: PagingState<Int, PositionModel.Response>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, PositionModel.Response.Data>): Int? {
         return null
     }
 
