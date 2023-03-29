@@ -64,11 +64,6 @@ class HomeJobFragment : BaseFragment<FragmentHomeJobBinding, HomeJobViewModel>()
     }
 
     private fun initAdapter() {
-        binding?.rvPosition?.also {
-            val llm = LinearLayoutManager(context)
-            llm.orientation = LinearLayoutManager.VERTICAL
-            it.layoutManager = llm
-        }
         itemPositionAdapter = ItemPositionAdapter {
             navigateToDetail(it)
         }
