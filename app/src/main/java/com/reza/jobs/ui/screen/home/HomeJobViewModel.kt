@@ -34,4 +34,28 @@ class HomeJobViewModel (private val repository: JobRepository, application: Appl
             }
         }
     }
+
+    fun getListSearchPosition(
+        description: String,
+        location: String
+    ){
+        viewModelScope.launch {
+            _listPosition.postValue(Resource.loading())
+            try {
+                val response = repository.getSearchPosition(
+                    description,
+                    location
+                )
+                _listPosition.postValue(Resource.success(response))
+            } catch (t: Throwable) {
+                _listPosition.postValue(
+                    Resource.error(
+                        ErrorUtil.getErrorThrowableMsg(t),
+                        null,
+                        t
+                    )
+                )
+            }
+        }
+    }
 }

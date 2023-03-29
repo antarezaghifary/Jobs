@@ -1,7 +1,7 @@
 package com.reza.jobs.ui.screen.home
 
 import android.content.Intent
-import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.reza.jobs.R
@@ -10,6 +10,7 @@ import com.reza.jobs.databinding.FragmentHomeJobBinding
 import com.reza.jobs.ui.base.BaseFragment
 import com.reza.jobs.ui.screen.detail.DetailJobActivity
 import com.reza.jobs.util.Status
+import net.cachapa.expandablelayout.ExpandableLayout
 import org.koin.android.ext.android.inject
 
 class HomeJobFragment : BaseFragment<FragmentHomeJobBinding, HomeJobViewModel>(), HomeJobNavigator {
@@ -23,8 +24,31 @@ class HomeJobFragment : BaseFragment<FragmentHomeJobBinding, HomeJobViewModel>()
         super.onInitialization()
         _binding = getViewDataBinding()
         binding?.lifecycleOwner = this
+        initUI()
+        initListener()
         onGetPosition()
         initAdapter()
+    }
+
+    private fun initListener() {
+        binding?.apply {
+            btnSearch.setOnClickListener {
+                homeViewModel.getListSearchPosition(
+                    description = svPosition.query.toString(),
+                    location = etLocation.text.toString()
+                )
+            }
+        }
+    }
+
+    private fun initUI() {
+        binding?.apply {
+            ivFilter.setOnClickListener {
+            (view?.findViewById<View>(
+                    R.id.elSearch
+                ) as ExpandableLayout).toggle()
+            }
+        }
     }
 
     companion object {

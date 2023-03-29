@@ -11,4 +11,14 @@ class JobRepository(
     ): List<PositionModel.Response.Data>{
         return apiService.getPosition().await()
     }
+
+    suspend fun getSearchPosition(
+        description: String,
+        location: String
+    ): List<PositionModel.Response.Data>{
+        return apiService.getSearchPosition(
+            description,
+            location
+        ).await()
+    }
 }
