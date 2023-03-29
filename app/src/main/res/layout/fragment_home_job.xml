@@ -98,11 +98,18 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_position"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:itemCount="10"
+            tools:itemCount="1"
             tools:listitem="@layout/layout_position" />
+
+        <ProgressBar
+            android:id="@+id/progress_bottom"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:indeterminate="true" />
     </LinearLayout>
 </layout>

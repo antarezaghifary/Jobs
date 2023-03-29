@@ -16,4 +16,9 @@ interface ApiService {
         @Query("description") description: String,
         @Query("location") location: String,
     ): Deferred<List<PositionModel.Response.Data>>
+
+    @GET("positions.json")
+    fun getPositionWithPagination(
+        @Query("page") page: Int,
+    ): Deferred<List<PositionModel.Response>>
 }

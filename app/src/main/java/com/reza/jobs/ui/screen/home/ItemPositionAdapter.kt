@@ -13,8 +13,7 @@ import com.reza.jobs.util.loadImage
 
 class ItemPositionAdapter(
     private val listener: (PositionModel.Response.Data) -> Unit
-) :
-    ListAdapter<PositionModel.Response.Data, ItemPositionAdapter.ViewHolder>(DiffCallback()) {
+) : ListAdapter<PositionModel.Response.Data, ItemPositionAdapter.ViewHolder>(DiffCallback()) {
 
     class ViewHolder private constructor(
         private val binding: LayoutPositionBinding,
@@ -25,7 +24,7 @@ class ItemPositionAdapter(
         fun bind(item: PositionModel.Response.Data) {
 //            binding.item = item
             if (item.company_logo != null) {
-                loadImage(binding.ivCompany,item.company_logo)
+                loadImage(binding.ivCompany, item.company_logo)
             }
             binding.tvPosition.text = item.title
             binding.tvCompany.text = item.company
